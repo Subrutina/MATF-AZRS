@@ -28,14 +28,14 @@ Github nalog može da se napravi na [zvaničnoj github stranici](https://github.
 
 **Definicije:**
 
-- `DVCS (Distributed Vecrsion Control System)`: Distribuirani sistem za kontrolu verzija. Primer: `git`.
+- `DVCS (Distributed Version Control System)`: Distribuirani sistem za kontrolu verzija. Primer: `git`.
 
 - `CVCS (Centralized Version Control System)`: Centralizovani sistem za kontrolu verzija. Primer: `SVN`.
 
 **Razlike:**
 
-- Centralizovani sistem za kontrolu verzija podrazumeva arhitekturu server i klijenta. Repozitorijum (mesto na kojem se čuvaju verzije koda) se nalazi na centralnom serveru i postoji samo jedan repozitorijum. Kada klijent (razvijaoc) želi da postavi novu verziju koda ili da dohvati novu verziju koda mora da komunicira sa centralnim serverom (neophodan je mrežni pristup). Često se pristup repozitorijumu omogućava preko `VPN (Virtual Private Network)`-a.
-- Distribuirani sistem nije toliko drugačiji od centralizovanog sistema za kontrolu verzija i lako je prilagođavanje sa jednog sistema na drugi. Razlika je u tome što što pored "centralnog servera" (ne mora da samo jedan), svaki klijent (razvijaoc) ima lokalni repozitorijum (kao lokalni server). Verzije koda mogu da se ažuriraju na lokalnom repozitorijumu (nije neophodan mrežni pristup), a kasnije da se te izmene postave na `glavni repozitorijum` (neophodan mrežni pristup).
+- Centralizovani sistem za kontrolu verzija podrazumeva arhitekturu server i klijenta. Repozitorijum (mesto na kojem se čuvaju verzije koda) se nalazi na centralnom serveru i postoji samo jedan repozitorijum. Kada klijent (razvijalac) želi da postavi novu verziju koda ili da dohvati novu verziju koda mora da komunicira sa centralnim serverom (neophodan je mrežni pristup). Često se pristup repozitorijumu omogućava preko `VPN (Virtual Private Network)`-a.
+- Distribuirani sistem nije toliko drugačiji od centralizovanog sistema za kontrolu verzija i lako je prilagođavanje sa jednog sistema na drugi. Razlika je u tome što što pored "centralnog servera" (ne mora da postoji samo jedan), svaki klijent (razvijalac) ima lokalni repozitorijum (kao lokalni server). Verzije koda mogu da se ažuriraju na lokalnom repozitorijumu (nije neophodan mrežni pristup), a kasnije da se te izmene postave na `glavni repozitorijum` (neophodan mrežni pristup).
 
 ![](./slike/CVCS-vs-DVCS.png)
 
@@ -58,13 +58,12 @@ Primeri:
 - `man git commit`
 - `man git branch`
 
-Na sledećem [linku](https://git-scm.com/doc) možete pronaći dokumentacija koja je identična sa man stranama.
+Na sledećem [linku](https://git-scm.com/doc) možete pronaći dokumentaciju koja je identična sa man stranama.
 
 ## Kreiranje git repozitorijuma
 
 Lokalni repozitorijum možemo da napravimo tako što koristimo komandu `git init` koja 
-pravi prazan git repozitorijum tj. kreira `.git` direktorijum koji je neophodan za rad sa git operacijama. Informacije kao što je istorija komitova se
-čuvaju u okviru ovog direktorijuma. Komanda `git clone` takođe kreira `.git` direktorijum.
+pravi prazan git repozitorijum tj. kreira `.git` direktorijum koji je neophodan za rad sa git operacijama. Informacije kao što je istorija komitova se čuvaju u okviru ovog direktorijuma. Komanda `git clone` takođe kreira `.git` direktorijum.
 
 **Primer**. Kreiranje git repozitorijuma:
 
@@ -94,7 +93,7 @@ Kada menjamo kod na računaru, zapravo ažuriramo `radni direktorijum (working d
 Komandom `git add [IME DATOTEKE]` se datoteka dodaje na `oblast za postavljanje (staging area)`, koja
 otprilike predstavlja sledeći potencijalni komit tj. izmenu lokalnog repozitorijuma. Komandom `git commit` se zapisuju izmene zabeležene u okviru `staging area` na git repozitorijum (beleži se u `.git/objects`).\
 ![](./slike/indeks.png)\
-Potrebno je da se nekako razlikuju promene datoteka u okviru tri sekcije (za sada se sve posmatra lokalno):
+Promene datoteka svrstavaju se na nivou tri sekcije (za sada se sve posmatra lokalno):
 
 - radni direktorijum,
 - oblast za postavljanje,
@@ -102,9 +101,9 @@ Potrebno je da se nekako razlikuju promene datoteka u okviru tri sekcije (za sad
 
 Ove promene se beleže u `indeksu` tj. `.git/index` datoteci.
 
-Koristeći kamandu `git status` možemo da vidimo promene posle poslednjeg komita tj. promene u okviru radnog direktorijuma koji se nalaze u `staging area` i promene koje se ne nalaze u okviru `staging area` (nalaze se samo u okviru radnog direktorijuma). 
+Koristeći kamandu `git status` možemo da vidimo promene nakon poslednjeg komita tj. promene u okviru radnog direktorijuma koji se nalaze u `staging area` i promene koje se ne nalaze u okviru `staging area` (nalaze se samo u okviru radnog direktorijuma). 
 
-**Primer: Ekstenzija za vektor kolekciju standardne C++ biblioteke**. Hoćemo da napravimo mini biblioteku za funkcije koje ne postoje u standardnoj biblioteci za rad sa vektorima ili postoje, ali ako implementiramo našu verziju, onda imamo veću fleksibilnost u načinu na koji koristimo te funkcije. Konkretno, želimo da implementiramo `load` (učitava vektor iz toka podataka) i `store` (upisuje vektor u tok podataka) funkcije.
+**Primer: Ekstenzija za vektor kolekciju standardne C++ biblioteke**. Hoćemo da napravimo mini biblioteku za funkcije koje ne postoje u standardnoj biblioteci za rad sa vektorima, ili postoje, ali ako implementiramo našu verziju, onda imamo veću fleksibilnost u načinu na koji koristimo te funkcije. Konkretno, želimo da implementiramo `load` (učitava vektor iz toka podataka) i `store` (upisuje vektor u tok podataka) funkcije.
 
 Kreiranje git repozitorijuma:
 
@@ -117,7 +116,7 @@ Initialized empty Git repository in /home/mokoyo/Desktop/AZRS/cas01/VectorExtens
 - Možemo da napravimo datoteke `main.cpp` i `input.txt` i da ih dodamo u `lokalni git repozitorijum`:
     * `touch main.cpp input.txt`, komanda `touch` pravi prazne datoteke.
     * `git add main.cpp input.txt`, ovom komandom su dodate datoteke na `staging area`. Alternativa: `git add *` (`*` je sve).
-    * `git commit -m "Inicijalni komit"`, ovom komandom su komitovane promene u git repozitorijum sa odgovarajućim opisom (deo posle `-m`. Očekivani rezultat:
+    * `git commit -m "Inicijalni komit"`, ovom komandom su komitovane promene u git repozitorijum sa odgovarajućim opisom (deo posle `-m`). Očekivani rezultat:
 ```
 [master (root-commit) 4fabb01] Inicijalni komit
  2 files changed, 0 insertions(+), 0 deletions(-)
@@ -142,7 +141,7 @@ int main()
 }
 ```
 
-* `echo "1 2 3" >> input.txt`, Objašnjenje: `echo "1 2 3"` ispisuje `1 2 3` u terminalu (standardni izlaz), a `>>` preusmeruje taj izlaz u datoteku `input.txt`. Razlika između `>>` i `>` je u tome što `>` vrši `trunc` operaciju (briše sadržaj), a `>>` dodaje izlaz na kraj datoteke tj. vrši `append` operaciju.
+* `echo "1 2 3" >> input.txt`, Objašnjenje: `echo "1 2 3"` ispisuje `1 2 3` u terminalu (standardni izlaz), a `>>` preusmerava taj izlaz u datoteku `input.txt`. Razlika između `>>` i `>` je u tome što `>` vrši `trunc` operaciju (briše sadržaj), a `>>` dodaje izlaz na kraj datoteke tj. vrši `append` operaciju.
 
 - Komanda `git status` nam daje informacije o stanju naših datoteka u repozitorijumu tj. da li se datoteka nalazi u `working directory` (odnosno ima izmene koje nismo obeližili za sledeći komit), da li se datoteka nalazi u `staging area` (odnosno ima izmene koje smo obeležili za sledeći komit), ili se sadržaj repozitorijuma poklapa sa verzijom lokalnog repozitorijuma (nema izmena od poslednjeg komita). Očekivani rezultat komande `git status`:
 ```
@@ -198,9 +197,9 @@ Date:   Sat Oct 2 13:45:19 2021 +0200
     Inicijalni komit
 ```
 
-Svaki komit ima svoj `SHA-1 hash` koji jedinstven. Koriste se različiti metapodaci kao što su ime autora, vreme komita, ... za računanje heš koda. Heš kod je jedinstven.
+Svaki komit ima svoj `SHA-1 hash` koji jedinstven. Za računanje heš koda koriste se različiti metapodaci kao što su ime autora, vreme komita, itd. Heš kod je jedinstven.
 
-Skraćena verzija `git log --pretty=oneline`:
+Skraćena verzija istorije komitova: `git log --pretty=oneline`:
 ```
 f7d0d1d4f453fc3401a130e6376988e74283e238 (HEAD -> master) Implementiran je skelet koda
 4fabb0111b8330dc45fd6cda7a3ae3b8134326ee Inicijalni komit
@@ -245,8 +244,8 @@ Postoji opcija da se vratimo na određeni komit. To znači da se sve promene koj
 - Primer: `git checkout 4fabb0111b8330dc45fd6cda7a3ae3b8134326ee` (zameniti sa pravim nazivom). Sada smo se vratili na prvi komit i ako pokrenemo `cat main.cpp` ili `cat input.txt`, vidimo da su prazne datoteke.
 - Prethodni primer predstavlja skok na "apsolutnu verziju". Alternativa je da se skače na "relativnu verziju" preko "pokazivača" na trenutni komit `HEAD`.
 - Primer: `git checkout HEAD~` skače na prethodni komit.
-- Primer: `git checkout HEAD~2` skače na pretprethodni komit. Možemo da izaberemo proizvoljan broj.
-- Primer: `git checkout HEAD` skaeče na trenutni komit.
+- Primer: `git checkout HEAD~2` skače na pretposlednji komit. Možemo da izaberemo proizvoljan broj.
+- Primer: `git checkout HEAD` skače na trenutni komit.
 - Primer: `git checkout master` skače na najnoviji komit na `master` grani.
 
 Takođe je moguće stavljati tagove verzija na bitne komitove. Na te komitove možemo da skočimo na sledeći način: `git checkout [TAG]`. Ako postavimo tag, onda ne moramo da pamtimo heš indeks tog bitnog komita.
